@@ -2,7 +2,7 @@ module.exports = {
   name: 'say',
   description: 'Say Command',
   usage: 'Used to make the bot say something.',
-  execute(message, args, Discord) {
+  execute(message, args, Discord, db) {
         const SayMessage = message.content.slice(4).trim();
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = config.default_prefix;
