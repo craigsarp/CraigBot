@@ -10,3 +10,7 @@ const PrefixScheme = mongooes.Scheme(
     require: true
   }
 )
+
+const model = mongoose.model("Prefixes", PrefixSchema)
+
+module.exports = model;
