@@ -7,7 +7,7 @@ module.exports = {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = config.default_prefix;
         if (SayMessage.includes(prefix)) {
-          message.reply("Nice Try Loser");
+          return message.reply("Nice Try Loser");
         }
         message.channel.send("**" + SayMessage + "**");
         message.channel.send("- " + `**${message.author}**`);
