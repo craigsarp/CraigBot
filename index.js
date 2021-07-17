@@ -175,10 +175,11 @@ client.on("message", message => {
     if (command === 'setwelcome') {
         client.commands.get('setwelcome').execute(message, args, Discord, db);
     }
+    
+    if (command === 'ping') {
+        client.commands.get('ping').execute(message, args, Discord, db);
+    }
    
-
-
-
 });
 
 client.login(process.env.TOKEN);
