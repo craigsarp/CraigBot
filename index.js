@@ -179,6 +179,10 @@ client.on("message", message => {
     if (command === 'ping') {
         client.commands.get('ping').execute(message, args, Discord, client);
     }
+    
+    if (command === 'say') {
+        client.commands.get('say').execute(message, args, Discord);
+    }
    
 });
 
