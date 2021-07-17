@@ -59,7 +59,7 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
 
 
 async (parameters) =>
-client.on(async ("message", message =>  {
+client.on("message" async (message) =>  {
 
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
