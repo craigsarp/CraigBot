@@ -139,7 +139,7 @@ client.on("message", message => {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').execute(message, args, Discord, db);
+        client.commands.get('prefix').run(message, args, Discord, db);
     }
 
     if (command === 'serverinfo') {
