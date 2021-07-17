@@ -1,0 +1,8 @@
+module.exports = {
+  name: '',
+  description: 'Command',
+  usage: '',
+  execute(message, args, Discord) {
+  
+  }
+}
