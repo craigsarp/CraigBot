@@ -2,7 +2,7 @@ module.exports = {
     name: 'prefix',
     description: 'Prefix Command',
     usage: 'Used to change the prefix on your server.',
-    execute(message, args, Discord, db) {
+     run: async (message, args, Discord, db) => {
         if (!message.member.hasPermission("ADMINISTRATOR")) {
             return message.channel.send("No no no.");
         }
