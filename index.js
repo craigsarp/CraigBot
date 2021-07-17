@@ -12,7 +12,7 @@ const ms = require('ms')
 
 const cooldown = new Set();
 
-const mongodb = require('./mongo.js')()
+const mongodb = require('../mongo.js')()
 
 const PrefixSchema = require('./schema/PrefixSchema')
 
