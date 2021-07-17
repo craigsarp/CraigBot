@@ -181,7 +181,7 @@ client.on("message", message => {
     }
     
     if (command === 'say') {
-        client.commands.get('say').execute(message, args, Discord, db);
+        client.commands.get('say').execute(message, args, Discord, db, config);
     }
    
 });
