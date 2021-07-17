@@ -12,6 +12,10 @@ const ms = require('ms')
 
 const cooldown = new Set();
 
+const mongodb = require('./mongo')()
+
+const PrefixSchema = require('./schema/PrefixSchema')
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -61,8 +65,16 @@ client.on("message", message => {
         return;
     }
 
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) prefix = config.default_prefix;
+    let prefix;
+    let data = await PrefixSchema.findOne({
+        _id: message.guild.id
+    })
+    if(data === null) {
+        prefix = "?"
+    } else {
+        prefix = data.newPrefix
+        console.log(data.newPrefix)
+    }
     if (!message.content.startsWith(prefix)) return;
 
 
