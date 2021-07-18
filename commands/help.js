@@ -1,7 +1,7 @@
 module.exports = {
     name: 'help',
     description: 'Help Command',
-    usage: 'Used to help the dumb.',
+    usage: 'Used to help the dumb people.',
     run: async(message, args, Discord, fs, config, prefixSchema) => {
         let prefix;
         const dataPrefix = await prefixSchema.findOne({
