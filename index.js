@@ -10,8 +10,6 @@ const fs = require('fs');
 
 const ms = require('ms');
 
-let prefix = config.default_prefix;
-
 const weather = require('weather-js');
 
 const mongoose = require('mongoose');
@@ -43,6 +41,7 @@ mongoose.connection.on('disconnected', () => {
 });
 
 const welcomeSchema = require('./models/welcome-schema');
+const prefixSchema = require('./models/prefix');
 
 const cooldown = new Set();
 
@@ -89,8 +88,20 @@ client.on("message", async(message) => {
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
-    
-    if (!message.content.startsWith(prefix)) return;
+    const data = await prefix.findOne({
+        GuildID: message.guild.id
+    });
+    let prefix;
+    if(data) {
+        prefix = data.Prefix;
+
+        if (!message.content.startsWith(prefix)) return;
+    } else if (!data) {
+        //set the default prefix here
+        prefix = config.default_prefix;
+        
+        if (!message.content.startsWith(prefix)) return;
+    }
   
     const args = message.content.slice(prefix.length).split(/ +/);
 
