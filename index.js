@@ -4,6 +4,10 @@ const client = new Discord.Client();
 
 const config = require('./commands/config.json');
 
+const clientMongoose = new Client();
+clientMongoose.mongoose = require('./utils/mongoose.js');
+client.mongoose.init();
+
 const db = require('quick.db');
 
 const fs = require('fs');
