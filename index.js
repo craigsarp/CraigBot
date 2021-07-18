@@ -10,6 +10,8 @@ const fs = require('fs');
 
 const ms = require('ms');
 
+const weather = require('weather-js');
+
 const mongoose = require('mongoose');
 const dbOptions = {
            useNewUrlParser: true,
@@ -222,6 +224,9 @@ client.on("message", async(message) => {
         client.commands.get('ping').execute(message, args, Discord, client);
     }
    
+    if (command === 'weather') {
+        client.commands.get('ping').execute(message, args, Discord, weather);
+    }   
 
 
 
