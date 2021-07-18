@@ -2,7 +2,7 @@ module.exports = {
     name: 'prefix',
     description: 'Prefix Command',
     usage: 'Used to change the prefix on your server.',
-    run : async(client, message, args, prefixSchema) => {
+    run : async(client, message, args, prefixSchema, data) => {
            if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
 
     if (args[0].length > 5) return message.channel.send('Your new prefix must be under \`5\` characters!')
