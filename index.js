@@ -227,6 +227,10 @@ client.on("message", async(message) => {
     if (command === 'weather') {
         client.commands.get('weather').execute(message, args, Discord, weather);
     }   
+           
+    if (command === 'gayrate') {
+        client.commands.get('gayrate').execute(message, args, Discordr);
+    }  
 
 
 
