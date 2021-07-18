@@ -98,9 +98,9 @@ client.on("message", async(message) => {
     });
            
     if (data) {
-       let prefix = data.Prefix;
+       const prefix = data.Prefix;
     } else {
-       let prefix = config.default_prefix;
+       const prefix = config.default_prefix;
     }
 
 
