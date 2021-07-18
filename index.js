@@ -130,7 +130,8 @@ client.on("message", message => {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').execute(message, args, Discord, db);
+        //client.commands.get('prefix').execute(message, args, Discord, db);
+        message.reply('Disabled for safety reasons.');
     }
 
     if (command === 'serverinfo') {
@@ -138,11 +139,13 @@ client.on("message", message => {
     }
 
     if (command === 'start') {
-        client.commands.get('start').execute(message, args, db, Discord);
+        //client.commands.get('start').execute(message, args, db, Discord);
+        message.reply('Disabled for safety reasons.');
     }
 
     if (command === 'balance' || command === "bal") {
-        client.commands.get('balance').run(message, args, db, Discord, config, mongoEconomy);
+        //client.commands.get('balance').execute(message, args, db, Discord, config);
+        message.reply('Disabled for safety reasons.');
     }
 
      if (command === 'addmoney') {
@@ -150,7 +153,7 @@ client.on("message", message => {
         message.reply('Disabled for safety reasons.');
      }
     if (command === 'daily') {
-        if (cooldown.has(`daily_${message.author.id}`)) {
+        /*if (cooldown.has(`daily_${message.author.id}`)) {
             message.channel.send("You will have to wait until tomorrow")
         } else {
             client.commands.get('daily').execute(message, args, db, Discord);
@@ -159,12 +162,13 @@ client.on("message", message => {
             setTimeout(() => {
                 cooldown.delete(`daily_${message.author.id}`)
             }, 8.64e+7)
-        }
+        }*/
+        message.reply('Disabled for safety reasons.');
     }
     
     if (command === 'attack') {
         //client.commands.get('attack').execute(message, args, db, Discord);
-        message.reply('In Development!')
+        message.reply('Disabled for safety reasons.');
     }
 
      if (command === 'randnum') {
@@ -176,7 +180,8 @@ client.on("message", message => {
     }
     
     if (command === 'setwelcome') {
-        client.commands.get('setwelcome').execute(message, args, Discord, db);
+        //client.commands.get('setwelcome').execute(message, args, Discord, db);
+        message.reply('Disabled for safety reasons.');
     }
     
     if (command === 'ping') {
