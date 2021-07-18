@@ -92,7 +92,7 @@ client.on("message", async(message) => {
     }
     let custom;
      prefixSchema.findOne({
-        guildId: id
+        guildId: message.guild.id
     }, async(err, data) => {
         if (!data) {custom = config.default_prefix;} else {custom = data.prefix}
     })
