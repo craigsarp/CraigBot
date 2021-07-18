@@ -87,20 +87,23 @@ client.on("message", async(message) => {
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
-    let customPrefix; 
-    customPrefix = config.default_prefix;
-     prefixSchema.findOne({ guildId: message.guild.id }, async (err, data) => {
-        if (!data) {
-           customPrefix = data.prefix;
+    let custom;
+
+        const data = await prefixSchema.findOne({ Guild : message.guild.id })
+            .catch(err => console.log(err))
+        
+        if(data) {
+            custom = data.Prefix;
+        } else {
+            custom = config.default_prefix;
         }
-    })
      
   
 
 
 
 
-    const args = message.content.slice(customPrefix.length).split(/ +/);
+    const args = message.content.slice(custom.length).split(/ +/);
 
     const command = args.shift().toLowerCase();
 
