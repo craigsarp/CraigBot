@@ -4,8 +4,6 @@ const client = new Discord.Client();
 
 const config = require('./commands/config.json');
 
-const { GiveawaysManager } = require('discord-giveaways')
-
 const db = require('quick.db');
 
 const fs = require('fs');
@@ -236,11 +234,7 @@ client.on("message", async(message) => {
            
     if (command === '8ball') {
         client.commands.get('8ball').execute(message, args, Discord);
-    }  
-           
-    if (command === 'gstart') {
-        client.commands.get('gstart').execute(message, args, Discord, client, ms);
-    }  
+    }   
 
            
            
