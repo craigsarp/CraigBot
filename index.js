@@ -91,7 +91,7 @@ function generatePrefix(id) {
         let custom;
         if (!data) return custom = config.default_prefix;
         custom = data.prefix
-        return custom;
+        return custom.length;
         
     })
 }
@@ -103,7 +103,7 @@ client.on("message", async(message) => {
     }
     
 
-    const args = message.content.slice(generatePrefix(message.guild.id).length).split(/ +/);
+    const args = message.content.slice(generatePrefix(message.guild.id)).split(/ +/);
 
     const command = args.shift().toLowerCase();
 
