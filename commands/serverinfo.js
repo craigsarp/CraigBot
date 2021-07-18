@@ -3,7 +3,7 @@ module.exports = {
     description: 'Server Info Command',
     usage: 'Used to see the info of the server.',
     execute(message, args, Discord) {
-        if (!message.member.hasPermission('ADMINISTRATOR')) return message.reply('No no no.')
+        if (!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot use this command!')
         const ServerLogo = message.guild.iconURL();
         const ServerInfoEmbed = new Discord.MessageEmbed()
             .setColor('RANDOM')
