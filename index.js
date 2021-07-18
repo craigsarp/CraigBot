@@ -230,6 +230,10 @@ client.on("message", async(message) => {
     if (command === '8ball') {
         client.commands.get('8ball').execute(message, args, Discord);
     }
+    
+    if (command === 'userinfo') {
+        client.commands.get('userinfo').execute(message, args, Discord);
+    }
 
 
 
