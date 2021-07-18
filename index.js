@@ -215,8 +215,7 @@ client.on("message", async(message) => {
     }
     
     if (command === 'setwelcome') {
-        //client.commands.get('setwelcome').execute(message, args, Discord, db);
-        message.reply('Disabled for safety reasons.');
+        client.commands.get('setwelcome').run(client, message, args, welcomeSchema);;
     }
     
     if (command === 'ping') {
