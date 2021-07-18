@@ -40,10 +40,6 @@ const dbOptions = {
 
 const prefixSchema = require('./models/prefix.js');
 
-/**
-* @param {Client} client
-*/
-
 const cooldown = new Set();
 
 client.commands = new Discord.Collection();
@@ -171,7 +167,6 @@ client.on("message", async(message) => {
 
     if (command === 'prefix') {
         client.commands.get('prefix').run(client, message, args, prefixSchema);
-        //message.reply('Disabled for safety reasons.');
     }
 
     if (command === 'serverinfo') {
