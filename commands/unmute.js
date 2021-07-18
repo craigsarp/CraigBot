@@ -3,7 +3,7 @@ module.exports = {
     description: 'Unmute Command',
     usage: 'Used to unmute people.',
     execute(message, args, Discord) {
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('No no no.')
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cannot use this command!')
         const target = message.mentions.users.first();
         if (target) {
             let mutedRole = message.guild.roles.cache.find(role => role.name === 'muted');
