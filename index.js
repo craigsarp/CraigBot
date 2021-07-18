@@ -93,7 +93,7 @@ client.on("message", async(message) => {
            
     let prefix;
            
-    const data = await prefixSchema.findOne({ Guild : message.guild.id})
+    const data = await prefixSchema.findOne({ guildId: member.guild.id })
            .catch(err => console.log(err));
            
     if (data) {
