@@ -1,6 +1,6 @@
 module.exports = {
-    name: 'prefix',
-    description: 'Prefix Command',
+    name: 'setprefix',
+    description: 'Set Prefix Command',
     usage: 'Used to change the prefix on your server.',
     run : async(client, message, args) => {
         const data = await prefixModel.findOne({
