@@ -225,7 +225,7 @@ client.on("message", async(message) => {
     }
    
     if (command === 'weather') {
-        client.commands.get('ping').execute(message, args, Discord, weather);
+        client.commands.get('weather').execute(message, args, Discord, weather);
     }   
 
 
