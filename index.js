@@ -10,6 +10,9 @@ const fs = require('fs');
 
 const ms = require('ms');
 
+const mongoose = require('./utils/mongoose');
+mongoose.init();
+
 const cooldown = new Set();
 
 client.commands = new Discord.Collection();
