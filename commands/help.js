@@ -8,7 +8,6 @@ module.exports = {
         const data = await prefixSchema.findOne({
             GuildID: message.guild.id
         });
-        let prefix;
         if (data) {
             prefix = data.Prefix;
 
