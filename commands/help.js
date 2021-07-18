@@ -27,7 +27,7 @@ module.exports = {
             const helpEmbed = new Discord.MessageEmbed()
                 .setTitle('Here\'s a list of all my commands:')
                 .setDescription(commands.map(command => command.name).join(', '))
-                .setFooter(`\nYou can send \${prefix}help [command name]\ to get info on a specific command!`)
+                .setFooter(`\nYou can send ${prefix}help [command name] to get info on a specific command!`)
                 .setColor("RANDOM")
 
             message.channel.send(helpEmbed);
