@@ -162,8 +162,8 @@ client.on("message", async(message) => {
     }
 
     if (command === 'setprefix') {
-        //client.commands.get('setprefix').run(client, message, args, prefixSchema, data);
-        message.reply('Disabled for safety reasons.');
+        client.commands.get('setprefix').run(client, message, args, prefixSchema, data);
+        //message.reply('Disabled for safety reasons.');
     }
 
     if (command === 'serverinfo') {
