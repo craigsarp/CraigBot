@@ -8,7 +8,9 @@ const db = require('quick.db');
 
 const fs = require('fs');
 
-const ms = require('ms')
+const ms = require('ms');
+
+const mongoEconomy = require("discord-mongo-plus");
 
 const cooldown = new Set();
 
