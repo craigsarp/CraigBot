@@ -142,7 +142,7 @@ client.on("message", message => {
     }
 
     if (command === 'balance' || command === "bal") {
-        client.commands.get('balance').execute(message, args, db, Discord, config);
+        client.commands.get('balance').run(message, args, db, Discord, config, mongoEconomy);
     }
 
      if (command === 'addmoney') {
