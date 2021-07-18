@@ -3,7 +3,7 @@ module.exports = {
     name: 'help',
     description: 'Help Command',
     usage: 'Used to help the dumb.',
-    execute(message, args, Discord, fs, db, config) {
+    run: async(message, args, Discord, fs, db, config) =>{
         const data = await prefixSchema.findOne({
             GuildID: message.guild.id
         });
