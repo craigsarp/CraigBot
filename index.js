@@ -45,6 +45,19 @@ const welcomeSchema = require('./models/welcome-schema');
 
 const cooldown = new Set();
 
+const { GiveawaysManager } = require('discord-giveaways')
+const manager = new GiveawaysManager(bot, {
+    storage: "./giveaway.json",
+    updateCountdownEvery: 5000, //1000ms = 1s
+    default: {
+        botsCanWin: true,
+        exemptPermissions: [],
+        embedColor: "#3CFFFB",
+        reaction: "🎉"
+    }
+});
+
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -235,7 +248,13 @@ client.on("message", async(message) => {
     if (command === '8ball') {
         client.commands.get('8ball').execute(message, args, Discord);
     }  
+           
+    if (command === 'gstart') {
+        client.commands.get('gstart').execute(message, args, Discord, client, ms);
+    }  
 
+           
+           
 
 
 });
