@@ -4,6 +4,8 @@ const client = new Discord.Client();
 
 const config = require('./commands/config.json');
 
+const { GiveawaysManager } = require('discord-giveaways')
+
 const db = require('quick.db');
 
 const fs = require('fs');
