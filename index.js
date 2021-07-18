@@ -176,8 +176,8 @@ client.on("message", message => {
         client.commands.get('setwelcome').execute(message, args, Discord, db);
     }
     
-    if (command === 'setwelcome') {
-        client.commands.get('setwelcome').execute(message, args, Discord, client);
+    if (command === 'ping') {
+        client.commands.get('ping').execute(message, args, Discord, client);
     }
    
 
