@@ -12,7 +12,7 @@ const ms = require('ms')
 
 const cooldown = new Set();
 
-const mongoose = require('mongoose.js');
+const mongoose = require('mongoose');
 
 client.commands = new Discord.Collection();
 
