@@ -5,13 +5,13 @@ module.exports = {
     usage: 'Used to help the dumb.',
     run: async(message, args, Discord, fs, config) => {
         let prefix;
-        const data = await prefixSchema.findOne({
+        const dataPrefix = await prefixSchema.findOne({
             GuildID: message.guild.id
         });
-        if (data) {
-            prefix = data.Prefix;
+        if (dataPrefix) {
+            prefix = dataPrefix.Prefix;
 
-        } else if (!data) {
+        } else if (!dataPrefix) {
             //set the default prefix here
             prefix = config.default_prefix;
 
