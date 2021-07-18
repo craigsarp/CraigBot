@@ -151,8 +151,8 @@ client.on("message", async(message) => {
         client.commands.get('punch').execute(message, args, Discord);
     }
 
-    if (command === 'prefix') {
-        //client.commands.get('prefix').run(client, message, args, prefixSchema, data);
+    if (command === 'setprefix') {
+        //client.commands.get('setprefix').run(client, message, args, prefixSchema, data);
         message.reply('Disabled for safety reasons.');
     }
 
