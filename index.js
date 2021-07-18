@@ -10,7 +10,7 @@ const fs = require('fs');
 
 const ms = require('ms');
 
-const mongoEconomy = require("discord-mongo-plus");
+const mongooose = require('./utils/mongoose.js')
 
 const cooldown = new Set();
 
