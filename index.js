@@ -94,10 +94,10 @@ client.on("message", async(message) => {
         GuildID: id
     });
     let prefix;
-    if (data) {
-       prefix = data.Prefix;
-    } else {
+    if (data === null) {
        prefix = config.default_prefix;
+    } else {
+       prefix = data.Prefix;
     }
 
 
