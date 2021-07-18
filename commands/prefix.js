@@ -33,5 +33,4 @@ module.exports = {
         newData.save();
     }.save();
     }
-    }
 }
