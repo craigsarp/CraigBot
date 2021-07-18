@@ -170,7 +170,7 @@ client.on("message", async(message) => {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').run(client, message, args);
+        client.commands.get('prefix').run(client, message, args, prefixSchema);
         //message.reply('Disabled for safety reasons.');
     }
 
