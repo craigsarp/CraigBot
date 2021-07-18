@@ -10,10 +10,6 @@ const fs = require('fs');
 
 const ms = require('ms')
 
-const mongoCurrency = require('discord-mongo-currency');
- 
-mongoCurrency.connect(process.env.mongoPath);
-
 const cooldown = new Set();
 
 client.commands = new Discord.Collection();
