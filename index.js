@@ -84,26 +84,19 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
     })
 })
 
-function generatePrefix(id) {
-     prefixSchema.findOne({
-        guildId: id
-    }, async(err, data) => {
-        let custom;
-        if (!data) return custom = config.default_prefix;
-        custom = data.prefix
-        return custom.length;
-        
-    })
-}
 
 client.on("message", async(message) => {
 
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
-    
-
-    const args = message.content.slice(generatePrefix(message.guild.id)).split(/ +/);
+    let custom;
+     prefixSchema.findOne({
+        guildId: id
+    }, async(err, data) => {
+        if (!data) {custom = config.default_prefix;} else {custom = data.prefix}
+    })
+    const args = message.content.slice(custom.length).split(/ +/);
 
     const command = args.shift().toLowerCase();
 
