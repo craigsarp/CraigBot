@@ -2,7 +2,8 @@ module.exports = {
     name: 'balance',
     description: 'Balance Command',
     usage: 'Used to check how much money you have.',
-    execute(message, args, db, Discord, config) {
+    run: async(message, args, db, Discord, config, mongoEconomy) => {
+        mongoEconomy.connect('mongodb://' + process.env.mongoPath)
         let member = message.mentions.users.first() || message.author;
  
         let user = await mongoEconomy.find(member.id, message.guild.id);
