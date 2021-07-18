@@ -10,7 +10,8 @@ const fs = require('fs');
 
 const ms = require('ms');
 
-const mongooose = require('./utils/mongoose.js')
+const mongoose = require('./utils/mongoose.js')
+mongoose.init();
 
 const cooldown = new Set();
 
