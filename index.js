@@ -88,12 +88,12 @@ client.on("message", async(message) => {
         return;
     }
     let custom;
-
-        const data = await prefixSchema.findOne({ Guild : message.guild.id })
+                      
+        const data = await prefixSchema.findOne({ guildId : message.guild.id })
             .catch(err => console.log(err))
         
         if(data) {
-            custom = data.Prefix;
+            custom = data.prefix;
         } else {
             custom = config.default_prefix;
         }
