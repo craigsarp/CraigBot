@@ -164,11 +164,7 @@ client.on("message", async(message) => {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').run(client, message, args, prefixSchema);
-    }
-           
-    if (command === 'prefix-reset') {
-        client.commands.get('prefix-reset').run(client, message, args, prefixSchema);
+        client.commands.get('prefix').run(client, message, args, prefixSchema, data);
     }
 
     if (command === 'serverinfo') {
