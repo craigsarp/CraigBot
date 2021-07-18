@@ -89,6 +89,8 @@ client.on("message", async(message) => {
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
+    
+    if (!message.content.startsWith(prefix)) return;
   
     const args = message.content.slice(prefix.length).split(/ +/);
 
