@@ -14,31 +14,31 @@ const weather = require('weather-js');
 
 const mongoose = require('mongoose');
 const dbOptions = {
-           useNewUrlParser: true,
-           useUnifiedTopology: true,
-           autoIndex: false,
-           reconnectTries: Number.MAX_VALUE,
-           reconnectInterval: 500,
-           poolSize: 5,
-           connectTimeoutMS: 10000,
-           family:4
-       };
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: false,
+    reconnectTries: Number.MAX_VALUE,
+    reconnectInterval: 500,
+    poolSize: 5,
+    connectTimeoutMS: 10000,
+    family: 4
+};
 
-       mongoose.connect(process.env.mongoPath, dbOptions);
-       mongoose.set('useFindAndModify', false);
-       mongoose.Promise = global.Promise;
+mongoose.connect(process.env.mongoPath, dbOptions);
+mongoose.set('useFindAndModify', false);
+mongoose.Promise = global.Promise;
 
-       mongoose.connection.on('connected', () => {
-           console.log('Mongoose has successfully connected!');
-       });
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose has successfully connected!');
+});
 
-       mongoose.connection.on('err', err => {
-           console.error(`Mongoose connection error: \n${err.stack}`);
-       });
+mongoose.connection.on('err', err => {
+    console.error(`Mongoose connection error: \n${err.stack}`);
+});
 
-       mongoose.connection.on('disconnected', () => {
-           console.warn('Mongoose connection lost');
-       });
+mongoose.connection.on('disconnected', () => {
+    console.warn('Mongoose connection lost');
+});
 
 const prefixSchema = require('./models/prefix.js');
 const welcomeSchema = require('./models/welcome-schema');
@@ -59,9 +59,9 @@ console.log(client.commands);
 const keepAlive = require("./server");
 keepAlive();
 
-client.on('ready', async () => {
+client.on('ready', async() => {
     console.log(`Logged in as ${client.user.tag}!`);
-    
+
     client.user.setPresence({
         // You can show online, idle... Do not disturb is dnd
         activity: {
@@ -72,8 +72,10 @@ client.on('ready', async () => {
 });
 
 client.on("guildMemberAdd", (member) => { //usage of welcome event
- welcomeSchema.findOne({ guildId: member.guild.id }, async (err, data) => {
-        if(!data) return;
+    welcomeSchema.findOne({
+        guildId: member.guild.id
+    }, async(err, data) => {
+        if (!data) return;
 
         const user = member.user;
         const channel = member.guild.channels.cache.get(data.channelId);
@@ -83,22 +85,22 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
 })
 
 client.on("message", async(message) => {
-    
+
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
     let custom;
-                      
-        const data = await prefixSchema.findOne({ guildId : message.guild.id })
-            .catch(err => console.log(err))
-        
-        if(data) {
-            custom = data.prefix;
-        } else {
-            custom = config.default_prefix;
-        }
-     
-  
+
+    const data = await prefixSchema.findOne({
+            guildId: message.guild.id
+        })
+        .catch(err => console.log(err))
+
+    if (data) {
+        custom = data.prefix;
+    } else {
+        custom = config.default_prefix;
+    }
 
 
 
@@ -179,10 +181,10 @@ client.on("message", async(message) => {
         message.reply('Disabled for safety reasons.');
     }
 
-     if (command === 'addmoney') {
+    if (command === 'addmoney') {
         //client.commands.get('addmoney').execute(message, args, Discord, db);
         message.reply('Disabled for safety reasons.');
-     }
+    }
     if (command === 'daily') {
         /*if (cooldown.has(`daily_${message.author.id}`)) {
             message.channel.send("You will have to wait until tomorrow")
@@ -196,41 +198,41 @@ client.on("message", async(message) => {
         }*/
         message.reply('Disabled for safety reasons.');
     }
-    
+
     if (command === 'attack') {
         //client.commands.get('attack').execute(message, args, db, Discord);
         message.reply('Disabled for safety reasons.');
     }
 
-     if (command === 'randnum') {
+    if (command === 'randnum') {
         client.commands.get('randnum').execute(message, args, Discord);
     }
 
     if (command === 'meme') {
         client.commands.get('meme').run(message, args, Discord);
     }
-    
+
     if (command === 'setwelcome') {
         client.commands.get('setwelcome').run(client, message, args, welcomeSchema);;
     }
-    
+
     if (command === 'ping') {
         client.commands.get('ping').execute(message, args, Discord, client);
     }
-   
+
     if (command === 'weather') {
         client.commands.get('weather').execute(message, args, Discord, weather);
-    }   
-           
+    }
+
     if (command === 'gayrate') {
         client.commands.get('gayrate').execute(message, args, Discord);
-    }  
-           
+    }
+
     if (command === '8ball') {
         client.commands.get('8ball').execute(message, args, Discord);
-    }   
+    }
 
-          
+
 
 });
 
