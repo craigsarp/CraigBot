@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let Schema = new mongoose.Scheme({
+let Schema = new mongoose.Schema({
   Guild: String,
   Prefix: String,
 });
