@@ -39,6 +39,7 @@ const dbOptions = {
        });
 
 const prefixSchema = require('./models/prefix.js');
+const welcomeSchema = require('./models/welcome-schema');
 
 const cooldown = new Set();
 
@@ -69,19 +70,14 @@ client.on('ready', async () => {
 });
 
 client.on("guildMemberAdd", (member) => { //usage of welcome event
-  let chx = db.get(`welchannel_${member.guild.id}`); //defining var
-  
-  if(chx === null) { //check if var have value or not
-    return;
-  }
+ welcomeSchema.findOne({ guildId: member.guild.id }, async (err, data) => {
+        if(!data) return;
 
-  let wembed = new Discord.MessageEmbed() //define embed
-  .setAuthor(member.user.username, member.user.avatarURL())
-  .setColor("#ff2050")
-  .setThumbnail(member.user.avatarURL())
-  .setDescription(`We are very happy to have you in our server`);
-  
-  client.channels.cache.get(chx).send(wembed) //get channel and send embed
+        const user = member.user;
+        const channel = member.guild.channels.cache.get(data.channelId);
+
+        channel.send(`Welcome ${user}!`)
+    })
 })
 
 
