@@ -45,19 +45,6 @@ const welcomeSchema = require('./models/welcome-schema');
 
 const cooldown = new Set();
 
-const { GiveawaysManager } = require('discord-giveaways')
-const manager = new GiveawaysManager(client, {
-    storage: "./giveaway.json",
-    updateCountdownEvery: 5000, //1000ms = 1s
-    default: {
-        botsCanWin: true,
-        exemptPermissions: [],
-        embedColor: "#3CFFFB",
-        reaction: "🎉"
-    }
-});
-
-
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
