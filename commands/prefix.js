@@ -3,10 +3,10 @@ module.exports = {
     description: 'Prefix Command',
     usage: 'Used to change the prefix on your server.',
     run : async(client, message, args) => {
-          const data = await prefixModel.findOne({
+        const data = await prefixModel.findOne({
         GuildID: message.guild.id
     });
-        const prefixModel = require("../models/prefix")
+
     if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
 
     if (args[0].length > 5) return message.channel.send('Your new prefix must be under \`5\` characters!')
@@ -31,6 +31,6 @@ module.exports = {
             GuildID: message.guild.id
         })
         newData.save();
-    }.save();
+    }
     }
 }
