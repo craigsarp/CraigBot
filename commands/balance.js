@@ -2,7 +2,7 @@ module.exports = {
     name: 'balance',
     description: 'Balance Command',
     usage: 'Used to check how much money you have.',
-    run async: (message, args, db, Discord, config) => {
+    run: async(message, args, db, Discord, config) => {
         const mongoCurrency = require('discord-mongo-currency');
  
         mongoCurrency.connect(process.env.mongoPath);
