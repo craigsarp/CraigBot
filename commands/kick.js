@@ -53,7 +53,7 @@ module.exports = {
                 message.reply("You didn't mention the user to ban!");
             }
         } else {
-            message.reply("You Dont Have Permission!")
+            message.reply("You cannot use this command!")
         }
     }
 }
