@@ -3,37 +3,21 @@ module.exports = {
     description: 'Help Command',
     usage: 'Used to help the dumb.',
     execute(message, args, Discord, fs, db, config) {
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = config.default_prefix;
+        
+        prefix = config.default_prefix;
         const data = [];
         const {
             commands
         } = message.client;
 
         if (!args.length) {
-            data.push('Here\'s a list of all my commands:');
-            data.push(commands.map(command => command.name).join(', '));
-            data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+            const helpEmbed = new Discord.MessageEmbed()
+            .setTitle('Here\'s a list of all my commands:')
+            .setDescription(commands.map(command => command.name).join(', '))
+            .setFooter(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`)
+            .setColor("RANDOM")
 
-            return message.author.send(data, {
-                    split: true
-                })
-                .then(() => {
-                    if (message.channel.type === 'dm') return;
-                    let embed = new Discord.MessageEmbed()
-                        .setColor('#33FFFF')
-                        .setDescription(`I\'ve sent you a DM with all my commands ${message.author}!`)
-                        .setFooter('Bot Dev: craigsunday#0001')
-                        .setTimestamp(new Date(), )
-                        .setThumbnail(`${message.author.displayAvatarURL({ dynamic: true })}`)
-                    message.channel.send({
-                        embed
-                    });
-                })
-                .catch(error => {
-                    console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-                    message.reply('it seems like I can\'t DM you!');
-                });
+             message.channel.send(helpEmbed);
         }
 
         const name = args[0].toLowerCase();
