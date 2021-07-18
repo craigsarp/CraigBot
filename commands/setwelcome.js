@@ -2,17 +2,25 @@ module.exports = {
   name: 'setwelcome',
   description: 'Set Welcome Channel Command',
   usage: 'Used to set the welcome channel.',
-  execute(message, args, Discord, db) {
+  run: async (client, message, args, welcomeSchema) => {
   let channel = message.mentions.channels.first() //mentioned channel
     
-    if(!channel) { //if channel is not mentioned
-      return message.channel.send("Please Mention the channel first")
-    }
-    
-    //Now we gonna use quick.db
-    
-    db.set(`welchannel_${message.guild.id}`, channel.id) //set id in var
-    
-    message.channel.send(`Welcome Channel set to ${channel}`) //send success message
+   if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You cannot use this command!");
+
+        const channel = message.mentions.channels.first();
+        if(!channel) return message.reply("Please specify a channel you would like to be your welcome channel!");
+
+        welcomeSchema.findOne({ guildId: message.guild.id }, async (err, data) => {
+            if (data){
+                data.channelId = channel.id;
+                data.save();
+            } else {
+                new welcomeSchema({
+                    guildId: message.guild.id,
+                    channelId: channel.id,
+                }).save();
+            }
+            message.reply(`New welcome channel is now set as: ${channel}!`);
+        })
   }
 }
