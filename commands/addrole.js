@@ -3,7 +3,7 @@ module.exports = {
   description: 'Add Role Command',
   usage: 'Used by admins to add roles to users.',
   execute(message, args, Discord) {
-    if (!message.member.hasPermission('ADMINISTRATOR')) return message.reply('No no no.')
+    if (!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot use this command!')
 
     let member = message.mentions.members.first()
 
