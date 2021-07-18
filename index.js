@@ -144,7 +144,7 @@ client.on("message", message => {
     }
 
     if (command === 'balance' || command === "bal") {
-        client.commands.get('balance').execute(message, args, db, Discord, config);
+        client.commands.get('balance').execute(message, args, db, Discord, config, mongoCurrency);
     }
 
      if (command === 'addmoney') {
