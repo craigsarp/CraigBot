@@ -19,6 +19,6 @@ module.exports = {
     Total: ${user.coinsInBank + user.coinsInWallet}`);
     
     message.channel.send(embed);
-        }
+        
     }
 }
