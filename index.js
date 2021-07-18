@@ -88,7 +88,7 @@ client.on("message", async(message) => {
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
-    const data = await prefix.findOne({
+    const data = await prefixSchema.findOne({
         GuildID: message.guild.id
     });
     let prefix;
