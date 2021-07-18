@@ -84,8 +84,8 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
     })
 })
 
-function generateHex() {
-     welcomeSchema.findOne({
+function generatePrefix() {
+     prefixSchema.findOne({
         guildId: member.guild.id
     }, async(err, data) => {
         let custom;
@@ -102,7 +102,7 @@ client.on("message", async(message) => {
     }
     
 
-    const args = message.content.slice(generateHex().length).split(/ +/);
+    const args = message.content.slice(generatePrefix().length).split(/ +/);
 
     const command = args.shift().toLowerCase();
 
