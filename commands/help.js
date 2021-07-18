@@ -1,10 +1,23 @@
+const prefixSchema = require('./models/prefix');
 module.exports = {
     name: 'help',
     description: 'Help Command',
     usage: 'Used to help the dumb.',
     execute(message, args, Discord, fs, db, config) {
-        
-        prefix = config.default_prefix;
+        const data = await prefixSchema.findOne({
+            GuildID: message.guild.id
+        });
+        let prefix;
+        if (data) {
+            prefix = data.Prefix;
+
+            if (!message.content.startsWith(prefix)) return;
+        } else if (!data) {
+            //set the default prefix here
+            prefix = config.default_prefix;
+
+            if (!message.content.startsWith(prefix)) return;
+        }
         const data = [];
         const {
             commands
@@ -12,12 +25,12 @@ module.exports = {
 
         if (!args.length) {
             const helpEmbed = new Discord.MessageEmbed()
-            .setTitle('Here\'s a list of all my commands:')
-            .setDescription(commands.map(command => command.name).join(', '))
-            .setFooter(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`)
-            .setColor("RANDOM")
+                .setTitle('Here\'s a list of all my commands:')
+                .setDescription(commands.map(command => command.name).join(', '))
+                .setFooter(`\nYou can send \${prefix}help [command name]\ to get info on a specific command!`)
+                .setColor("RANDOM")
 
-             message.channel.send(helpEmbed);
+            message.channel.send(helpEmbed);
         }
 
         const name = args[0].toLowerCase();
