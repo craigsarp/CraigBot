@@ -38,7 +38,7 @@ const dbOptions = {
            console.warn('Mongoose connection lost');
        });
 
-const PrefixSchema = require('./models/prefix.js');
+const prefixSchema = require('./models/prefix.js');
 
 /**
 * @param {Client} client
