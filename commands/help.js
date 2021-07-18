@@ -1,9 +1,8 @@
-const prefixSchema = require('./models/prefix.js');
 module.exports = {
     name: 'help',
     description: 'Help Command',
     usage: 'Used to help the dumb.',
-    run: async(message, args, Discord, fs, config) => {
+    run: async(message, args, Discord, fs, config, prefixSchema) => {
         let prefix;
         const dataPrefix = await prefixSchema.findOne({
             GuildID: message.guild.id
