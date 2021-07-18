@@ -84,9 +84,9 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
     })
 })
 
-function generatePrefix() {
+function generatePrefix(id) {
      prefixSchema.findOne({
-        guildId: member.guild.id
+        guildId: id
     }, async(err, data) => {
         let custom;
         if (!data) return custom = config.default_prefix;
@@ -102,7 +102,7 @@ client.on("message", async(message) => {
     }
     
 
-    const args = message.content.slice(generatePrefix().length).split(/ +/);
+    const args = message.content.slice(generatePrefix(message.guild.id).length).split(/ +/);
 
     const command = args.shift().toLowerCase();
 
