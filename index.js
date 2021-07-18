@@ -10,6 +10,8 @@ const fs = require('fs');
 
 const ms = require('ms');
 
+let prefix = config.default_prefix;
+
 const weather = require('weather-js');
 
 const mongoose = require('mongoose');
@@ -90,13 +92,8 @@ client.on("message", async(message) => {
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
-    let custom;
-     prefixSchema.findOne({
-        guildId: message.guild.id
-    }, async(err, data) => {
-        if (!data) {custom = config.default_prefix;} else {custom = data.prefix}
-    })
-    const args = message.content.slice(custom.length).split(/ +/);
+  
+    const args = message.content.slice(prefix.length).split(/ +/);
 
     const command = args.shift().toLowerCase();
 
@@ -155,7 +152,8 @@ client.on("message", async(message) => {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').run(client, message, args, prefixSchema, data);
+        //client.commands.get('prefix').run(client, message, args, prefixSchema, data);
+        message.reply('Disabled for safety reasons.');
     }
 
     if (command === 'serverinfo') {
