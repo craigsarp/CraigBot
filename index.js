@@ -14,6 +14,8 @@ const cooldown = new Set();
 
 const mongoose = require('mongoose');
 
+const GuildSchema = require('../schemas/Guild-scheme.js')
+
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
