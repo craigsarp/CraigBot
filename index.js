@@ -91,16 +91,16 @@ client.on("message", async(message) => {
     }
            
            
-    let prefix;
+     
            
      const data = await prefixSchema.findOne({
         GuildID: message.guild.id
     });
            
     if (data) {
-        prefix = data.Prefix;
+       let prefix = data.Prefix;
     } else {
-        prefix = config.default_prefix;
+       let prefix = config.default_prefix;
     }
 
 
