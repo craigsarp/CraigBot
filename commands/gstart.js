@@ -21,7 +21,6 @@
         let giveawayPrize = args.slice(3).join(" ")
 
         if(!giveawayPrize) return message.reply('Please specify a valid prize!\n`Usage: c.gstart #<channel> <duration>D/M/s/ms <num. of winners> <prize>`')
-        const { GiveawaysManager } = require('discord-giveaways')
         const manager = new GiveawaysManager(client, {
             storage: "./giveaway.json",
             updateCountdownEvery: 5000, //1000ms = 1s
