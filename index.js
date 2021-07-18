@@ -12,10 +12,6 @@ const ms = require('ms')
 
 const cooldown = new Set();
 
-const mongoose = require('mongoose');
-
-const GuildSchema = require('../schemas/Guild-scheme.js')
-
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -32,11 +28,6 @@ keepAlive();
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    
-    await mongoose.connect(process.env.mongoPath, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }).then(console.log('Connect to MongoDB'));
     
     client.user.setPresence({
         // You can show online, idle... Do not disturb is dnd
