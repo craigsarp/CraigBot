@@ -3,6 +3,7 @@ module.exports = {
     description: 'Prefix Command',
     usage: 'Used to change the prefix on your server.',
     run : async(client, message, args, prefixSchema) => {
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You cannot use this command!");
         const res = await args.join(" ")
         if(!res) return message.channel.send('Please specify a prefix to change to.')
         prefixSchema.findOne({ Guild : message.guild.id }, async(err, data) => {
