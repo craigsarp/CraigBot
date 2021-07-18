@@ -38,6 +38,12 @@ const dbOptions = {
            console.warn('Mongoose connection lost');
        });
 
+const PrefixSchema = require('./models/prefix.js');
+
+/**
+* @param {Client} client
+*/
+
 const cooldown = new Set();
 
 client.commands = new Discord.Collection();
@@ -84,15 +90,23 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
 
 
 
-client.on("message", message => {
+client.on("message", async(message) => {
 
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
     }
-
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) prefix = config.default_prefix;
-    if (!message.content.startsWith(prefix)) return;
+           
+           
+    let prefix;
+           
+    const data = await prefixSchema.findOne({ Guild :  message.guild.id})
+           .catch(err => console.log(err));
+           
+    if (data) {
+        prefix = data.Prefix;
+    } else {
+        prefix = config.default_prefix;
+    }
 
 
 
