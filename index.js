@@ -57,8 +57,6 @@ for (const file of commandFiles) {
 
 console.log(client.commands);
 // Make The Bot Active 24/7
-const keepAlive = require("./server");
-keepAlive();
 
 client.on('ready', async() => {
     console.log(`Logged in as ${client.user.tag}!`);
