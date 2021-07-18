@@ -3,7 +3,6 @@ module.exports = {
   description: 'Set Welcome Channel Command',
   usage: 'Used to set the welcome channel.',
   run: async (client, message, args, welcomeSchema) => {
-  let channel = message.mentions.channels.first() //mentioned channel
     
    if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You cannot use this command!");
 
