@@ -2,20 +2,23 @@ module.exports = {
     name: 'balance',
     description: 'Balance Command',
     usage: 'Used to check how much money you have.',
-    run: async (message, args, db, Discord, config, mongoCurrency) => {
-    const { MessageEmbed } = require('discord.js');
- 
-    const member = message.mentions.members.first() || message.member;
- 
-    const user = await mongoCurrency.findUser(member.id, message.guild.id); // Get the user from the database.
- 
-    const embed = new MessageEmbed()
-    .setTitle(`${member.user.username}'s Balance`)
-    .setDescription(`Wallet: ${user.coinsInWallet}
-    Bank: ${user.coinsInBank}/${user.bankSpace}
-    Total: ${user.coinsInBank + user.coinsInWallet}`);
-    
-    message.channel.send(embed);
+    execute(message, args, db, Discord, config) {
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = config.default_prefix;
+        if (db.get(`user_${message.author.id}.bal`) === null) {
+            message.reply(`The user needs to use \`${prefix}start\``)
+        } else {
+            let user = message.author.id;
+            let bal = db.get(`user_${message.author.id}.bal`)
 
-     }
+            const embed = new Discord.MessageEmbed()
+                .setTitle(`${message.author.username}\'s Balance`)
+                .setDescription(`${bal} :coin:`)
+                .setColor("RANDOM")
+                .setTimestamp()
+
+            message.channel.send(embed)
+
+        }
+    }
 }
