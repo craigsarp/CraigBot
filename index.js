@@ -229,7 +229,7 @@ client.on("message", async(message) => {
     }   
            
     if (command === 'gayrate') {
-        client.commands.get('gayrate').execute(message, args, Discordr);
+        client.commands.get('gayrate').execute(message, args, Discord);
     }  
 
 
