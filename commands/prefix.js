@@ -3,27 +3,30 @@ module.exports = {
     description: 'Prefix Command',
     usage: 'Used to change the prefix on your server.',
     run : async(client, message, args, prefixSchema) => {
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You cannot use this command!");
-        const res = await args.join(" ")
-        if(!res) return message.channel.send('Please specify a prefix to change to.')
-        prefixSchema.findOne({ Guild : message.guild.id }, async(err, data) => {
-            if(err) throw err;
-            if(data) {
-                prefixSchema.findOneAndDelete({ Guild : message.guild.id })
-                data = new prefixSchema({
-                    Guild : message.guild.id,
-                    Prefix : res
-                })
-                data.save()
-                message.channel.send(`Your prefix has been updated to **${res}**`)
-            } else {
-                data = new prefixSchema({
-                    Guild : message.guild.id,
-                    Prefix : res
-                })
-                data.save()
-                message.channel.send(`Custom prefix in this server is now set to **${res}**`)
-            }
+           if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
+
+    if (args[0].length > 5) return message.channel.send('Your new prefix must be under \`5\` characters!')
+
+    if (data) {
+        await prefixSchema.findOneAndRemove({
+            GuildID: message.guild.id
         })
+        
+        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
+
+        let newData = new prefixSchema({
+            Prefix: args[0],
+            GuildID: message.guild.id
+        })
+        newData.save();
+    } else if (!data) {
+        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
+
+        let newData = new prefixSchema({
+            Prefix: args[0],
+            GuildID: message.guild.id
+        })
+        newData.save();
+    }
     }
 }
