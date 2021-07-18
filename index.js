@@ -54,8 +54,8 @@ client.on("guildMemberAdd", (member) => { //usage of welcome event
 })
 
 
-async (parameters) =>
-client.on("message", async (message) =>  {
+
+client.on("message", message => {
 
     if (message.author.bot || message.channel instanceof Discord.DMChannel) {
         return;
@@ -127,7 +127,7 @@ client.on("message", async (message) =>  {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').run(message, args, Discord, db);
+        client.commands.get('prefix').execute(message, args, Discord, db);
     }
 
     if (command === 'serverinfo') {
@@ -135,13 +135,11 @@ client.on("message", async (message) =>  {
     }
 
     if (command === 'start') {
-        //client.commands.get('start').execute(message, args, db, Discord);
-        message.reply('Disabled for safety reasons.');
+        client.commands.get('start').execute(message, args, db, Discord);
     }
 
     if (command === 'balance' || command === "bal") {
-        //client.commands.get('balance').execute(message, args, db, Discord, config);
-        message.reply('Disabled for safety reasons.');
+        client.commands.get('balance').execute(message, args, db, Discord, config);
     }
 
      if (command === 'addmoney') {
@@ -149,7 +147,7 @@ client.on("message", async (message) =>  {
         message.reply('Disabled for safety reasons.');
      }
     if (command === 'daily') {
-        /*if (cooldown.has(`daily_${message.author.id}`)) {
+        if (cooldown.has(`daily_${message.author.id}`)) {
             message.channel.send("You will have to wait until tomorrow")
         } else {
             client.commands.get('daily').execute(message, args, db, Discord);
@@ -158,8 +156,7 @@ client.on("message", async (message) =>  {
             setTimeout(() => {
                 cooldown.delete(`daily_${message.author.id}`)
             }, 8.64e+7)
-        }*/
-        message.reply('Disabled for safety reasons.');
+        }
     }
     
     if (command === 'attack') {
@@ -179,14 +176,13 @@ client.on("message", async (message) =>  {
         client.commands.get('setwelcome').execute(message, args, Discord, db);
     }
     
-    if (command === 'ping') {
-        client.commands.get('ping').execute(message, args, Discord, client);
-    }
-    
-    if (command === 'say') {
-        client.commands.get('say').execute(message, args, Discord, db, config);
+    if (command === 'setwelcome') {
+        client.commands.get('setwelcome').execute(message, args, Discord, client);
     }
    
+
+
+
 });
 
 client.login(process.env.TOKEN);
