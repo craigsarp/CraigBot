@@ -2,7 +2,7 @@ module.exports = {
     name: 'prefix',
     description: 'Prefix Command',
     usage: 'Used to change the prefix on your server.',
-    run : async(client, message, args) => {
+    run : async(client, message, args, prefixSchema) => {
         const res = await args.join(" ")
         if(!res) return message.channel.send('Please specify a prefix to change to.')
         prefixSchema.findOne({ Guild : message.guild.id }, async(err, data) => {
