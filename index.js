@@ -31,7 +31,7 @@ keepAlive();
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     
-    await moongoose.connect(process.env.mongoPath, {
+    await mongoose.connect(process.env.mongoPath, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }).then(console.log('Connect to MongoDB'));
