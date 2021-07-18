@@ -236,9 +236,7 @@ client.on("message", async(message) => {
         client.commands.get('8ball').execute(message, args, Discord);
     }   
 
-           
-           
-
+          
 
 });
 
