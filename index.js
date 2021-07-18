@@ -108,7 +108,7 @@ client.on("message", async(message) => {
     const command = args.shift().toLowerCase();
 
     if (command === 'help') {
-        client.commands.get('help').run(message, args, Discord, fs, config);
+        client.commands.get('help').run(message, args, Discord, fs, config, prefixSchema);
     }
 
     if (command === 'ban') {
