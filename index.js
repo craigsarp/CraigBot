@@ -170,7 +170,7 @@ client.on("message", async(message) => {
     }
 
     if (command === 'prefix') {
-        client.commands.get('prefix').execute(message, args, Discord, db);
+        client.commands.get('prefix').run(client, message, args);
         //message.reply('Disabled for safety reasons.');
     }
 
