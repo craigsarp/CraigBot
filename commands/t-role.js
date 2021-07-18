@@ -12,7 +12,7 @@ module.exports = {
 
             ticket.setRole(message, role) //Set the support role, that gets pinged when a new ticket is created!
         } else {
-            message.reply("You dont have permission!")
+            message.reply("You cannot use this command!")
         }
     }
 }
