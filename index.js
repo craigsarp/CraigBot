@@ -90,7 +90,8 @@ function generatePrefix(id) {
     }, async(err, data) => {
         let custom;
         if (!data) return custom = config.default_prefix;
-        return custom = data.prefix;
+        custom = data.prefix
+        return custom;
         
     })
 }
