@@ -4,7 +4,7 @@ module.exports = {
     usage: 'Used to clear stupid messages.',
      async execute(message, args) {
     try {
-    if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('No no no.')
+    if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cannot use this command!')
     const amount = Number(args[0], 10);
 
     const messages = await message.channel.messages.fetch({
