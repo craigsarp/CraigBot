@@ -42,7 +42,6 @@ mongoose.connection.on('disconnected', () => {
     console.warn('Mongoose connection lost');
 });
 
-const prefixSchema = require('./models/prefix.js');
 const welcomeSchema = require('./models/welcome-schema');
 
 const cooldown = new Set();
