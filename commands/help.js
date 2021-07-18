@@ -1,39 +1,40 @@
-const prefixSchema = require('./models/prefix');
 module.exports = {
     name: 'help',
     description: 'Help Command',
     usage: 'Used to help the dumb.',
-    run: async(message, args, Discord, fs, config) =>{
-        const dataPrefix = await prefixSchema.findOne({
-            GuildID: message.guild.id
-        });
-        let prefix;
-        if (dataPrefix) {
-            prefix = dataPrefix.Prefix;
-
-            if (!message.content.startsWith(prefix)) return;
-        } else if (!dataPrefix) {
-            //set the default prefix here
-            prefix = config.default_prefix;
-
-            if (!message.content.startsWith(prefix)) return;
-        }
+    execute(message, args, Discord, fs, db, config) {
         const data = [];
         const {
             commands
         } = message.client;
 
         if (!args.length) {
-            const helpEmbed = new Discord.MessageEmbed()
-                .setTitle('Here\'s a list of all my commands:')
-                .setDescription(commands.map(command => command.name).join(', '))
-                .setFooter(`\nYou can send ${prefix}help [command name] to get info on a specific command!`)
-                .setColor("RANDOM")
+            data.push('Here\'s a list of all my commands:');
+            data.push(commands.map(command => command.name).join(', '));
+            data.push(`\nYou can send \`help [command name]\` to get info on a specific command!`);
 
-            message.channel.send(helpEmbed);
+            return message.author.send(data, {
+                    split: true
+                })
+                .then(() => {
+                    if (message.channel.type === 'dm') return;
+                    let embed = new Discord.MessageEmbed()
+                        .setColor('#33FFFF')
+                        .setDescription(`I\'ve sent you a DM with all my commands ${message.author}!`)
+                        .setFooter('Bot Dev: craigsunday#0001')
+                        .setTimestamp(new Date(), )
+                        .setThumbnail(`${message.author.displayAvatarURL({ dynamic: true })}`)
+                    message.channel.send({
+                        embed
+                    });
+                })
+                .catch(error => {
+                    console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+                    message.reply('it seems like I can\'t DM you!');
+                });
         }
 
-        const name = args[0];
+        const name = args[0].toLowerCase();
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
         if (!command) {
