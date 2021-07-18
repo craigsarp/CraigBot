@@ -3,7 +3,7 @@ module.exports = {
     description: 'Mute Command',
     usage: 'Used to mute the annoying.',
     execute(message, args, Discord, ms) {
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('No no no.')
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cannot use this command!')
         const target = message.mentions.users.first();
 
         if (!args[1] === null || message.mentions.members.first()){
