@@ -33,7 +33,7 @@ module.exports = {
                 victim.send(embedDMS);
             }
         } else {
-            message.reply("You Dont Have Permission!")
+            message.reply("You cannot use this command!")
         }
     }
 }
