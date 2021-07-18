@@ -231,6 +231,10 @@ client.on("message", async(message) => {
     if (command === 'gayrate') {
         client.commands.get('gayrate').execute(message, args, Discord);
     }  
+           
+    if (command === '8ball') {
+        client.commands.get('8ball').execute(message, args, Discord);
+    }  
 
 
 
