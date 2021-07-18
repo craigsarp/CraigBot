@@ -90,9 +90,6 @@ client.on("message", async(message) => {
         return;
     }
            
-           
-     
-           
      const data = await prefixSchema.findOne({
         GuildID: message.guild.id
     });
