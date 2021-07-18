@@ -6,17 +6,17 @@ module.exports = {
     execute(message, args, Discord, fs, config) {
         let prefix;
         const data = await prefixSchema.findOne({
-        GuildID: message.guild.id
-    });
-    let prefix;
-    if(data) {
-        prefix = data.Prefix;
+            GuildID: message.guild.id
+        });
+        let prefix;
+        if (data) {
+            prefix = data.Prefix;
 
-    } else if (!data) {
-        //set the default prefix here
-        prefix = config.default_prefix;
-   
-    }
+        } else if (!data) {
+            //set the default prefix here
+            prefix = config.default_prefix;
+
+        }
         const data = [];
         const {
             commands
@@ -24,12 +24,12 @@ module.exports = {
 
         if (!args.length) {
             const helpEmbed = new Discord.MessageEmbed()
-            .setTitle('Here\'s a list of all my commands:')
-            .setDescription(commands.map(command => command.name).join(', '))
-            .setFooter(`\nYou can send ${prefix}help [command name] to get info on a specific command!`)
-            .setColor("RANDOM")
+                .setTitle('Here\'s a list of all my commands:')
+                .setDescription(commands.map(command => command.name).join(', '))
+                .setFooter(`\nYou can send ${prefix}help [command name] to get info on a specific command!`)
+                .setColor("RANDOM")
 
-             return message.channel.send(helpEmbed);
+            return message.channel.send(helpEmbed);
         }
 
         const name = args[0].toLowerCase();
