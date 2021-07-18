@@ -2,7 +2,7 @@ module.exports = {
     name: 'balance',
     description: 'Balance Command',
     usage: 'Used to check how much money you have.',
-    execute(message, args, db, Discord, config) {
+    run: async (message, args, db, Discord, config) => {
     const { MessageEmbed } = require('discord.js');
  
     const member = message.mentions.members.first() || message.member;
