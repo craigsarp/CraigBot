@@ -15,28 +15,6 @@ module.exports = {
 
             let mutedRole = message.guild.roles.cache.find(role => role.name === 'muted');
             let memberTarget = message.guild.members.cache.get(target.id);
-
-            if (!args[1]) {
-                memberTarget.roles.add(mutedRole.id);
-
-                const muteSuccess = new Discord.MessageEmbed()
-                    .setColor('RANDOM')
-                    .setTitle('Muted Successfully!')
-                    .setDescription(`<@${memberTarget.user.id}> has been muted 🤫`);
-
-
-
-                message.channel.send(muteSuccess);
-
-                const muteSuccessDM = new Discord.MessageEmbed()
-                    .setColor('RANDOM')
-                    .setTitle('Muted!')
-                    .setDescription(`You have been muted forever 🤫`)
-                    .setFooter(`Moderator : @${message.author.tag}`)
-                    .setTimestamp();
-                memberTarget.send(muteSuccessDM);
-                return;
-            }
             
             memberTarget.roles.add(mutedRole.id);
             const muteSuccessTimer = new Discord.MessageEmbed()
