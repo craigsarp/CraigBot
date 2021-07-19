@@ -1,66 +1,59 @@
 module.exports = {
-    name: 'mute',
-    description: 'Mute Command',
-    usage: 'Used to mute the annoying.',
-    execute(message, args, Discord, ms) {
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cant use this command!')
-        const target = message.mentions.users.first();
+    name: 'kick',
+    description: 'Kick Command',
+    usage: 'Used to kick the annoying.',
+    execute(message, args, Discord) {
+        if (message.member.hasPermission("KICK_MEMBERS")) {
+            // Assuming we mention someone in the message, this will return the user
+            // Read more about mentions over at http//discord.js.org/#/docs/main/master/class/MessageMentions
+            const user = message.mentions.users.first();
+            // If we have a user mentioned
+            if (user) {
+                // Now we get the member from the user
+                const member = message.guild.member(user);
 
-        if (isNaN(args[1])) || message.mentions.members.first()){
-          if (isNaN(ms(args[1])) {
-          return message.reply('Please type a valid time.')
-        }
-        }
-        if (target) {
+                // If the member is in the guild
+                if (member) {
+                    /**
+                     * Kick the member
+                     * Make sure you run this on a member, not a user!
+                     * There are big differences between a user and a member
+                     */
 
-            let mutedRole = message.guild.roles.cache.find(role => role.name === 'muted');
-            let memberTarget = message.guild.members.cache.get(target.id);
+                    member
 
-            if (!args[1]) {
-                memberTarget.roles.add(mutedRole.id);
+                        .ban()
+                        .then(() => {
+                            // We let the message author know we were able to kick the person
+                            const kickSuccessDM = new Discord.MessageEmbed()
+                                .setColor('RANDOM')
+                                .setTitle('Kicked!')
+                                .setDescription(`You have been kicked`)
+                                .setFooter(`Moderator : @${message.author.tag}`)
+                                .setTimestamp();
 
-                const muteSuccess = new Discord.MessageEmbed()
-                    .setColor('RANDOM')
-                    .setTitle('Muted Successfully!')
-                    .setDescription(`<@${memberTarget.user.id}> has been muted 🤫`);
+                            member.send(kickSuccessDM);
+                            message.reply(`Successfully Kicked ${user.tag}`);
 
-
-
-                message.channel.send(muteSuccess);
-
-                const muteSuccessDM = new Discord.MessageEmbed()
-                    .setColor('RANDOM')
-                    .setTitle('Muted!')
-                    .setDescription(`You have been muted forever 🤫`)
-                    .setFooter(`Moderator : @${message.author.tag}`)
-                    .setTimestamp();
-                memberTarget.send(muteSuccessDM);
-                return;
+                        })
+                        .catch(err => {
+                            // An error happened
+                            // This is generally due to the bot not being able to kick the member,
+                            // either due to missing permissions or role hierarchy
+                            message.reply('I was unable to kick the member');
+                            // Log the error
+                            console.error(err);
+                        });
+                } else {
+                    // The mentioned user isn't in this guild
+                    message.reply("That user isn't in this guild!");
+                }
+                // Otherwise, if no user was mentioned
+            } else {
+                message.reply("You didn't mention the user to ban!");
             }
-            
-            memberTarget.roles.add(mutedRole.id);
-            const muteSuccessTimer = new Discord.MessageEmbed()
-                .setColor('RANDOM')
-                .setTitle('Muted Successfully!')
-                .setDescription(`<@${memberTarget.user.id}> has been muted for ${ms(ms(args[1]))} 🤫`);
-            message.channel.send(muteSuccessTimer);
-
-            const muteSuccessDMTimer = new Discord.MessageEmbed()
-                .setColor('RANDOM')
-                .setTitle('Muted!')
-                .setDescription(`You have been muted for ${ms(ms(args[1]))} 🤫`)
-                .setFooter(`Moderator : @${message.author.tag}`)
-                .setTimestamp();;
-            memberTarget.send(muteSuccessDMTimer);
-
-            
-            setTimeout(function() {
-                memberTarget.roles.remove(mutedRole.id);
-            }, ms(args[1]));
-
         } else {
-            message.channel.send('Cant find that member!');
+            message.reply("You Dont Have Permission!")
         }
-
     }
 }
