@@ -6,7 +6,7 @@ module.exports = {
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cant use this command!')
         const target = message.mentions.users.first();
 
-        if (!args[1] === null || message.mentions.members.first()){
+        if (isNaN(args[1)) || message.mentions.members.first()){
           if (isNaN(ms(args[1]))) {
           return message.reply('Please type a valid time.')
         }
