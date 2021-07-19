@@ -3,7 +3,7 @@ module.exports = {
     description: 'Mute Command',
     usage: 'Used to mute the annoying.',
     execute(message, args, Discord, ms) {
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cannot use this command!')
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You cant use this command!')
         const target = message.mentions.users.first();
 
         if (!args[1] === null || message.mentions.members.first()){
@@ -15,6 +15,28 @@ module.exports = {
 
             let mutedRole = message.guild.roles.cache.find(role => role.name === 'muted');
             let memberTarget = message.guild.members.cache.get(target.id);
+
+            if (!args[1]) {
+                memberTarget.roles.add(mutedRole.id);
+
+                const muteSuccess = new Discord.MessageEmbed()
+                    .setColor('RANDOM')
+                    .setTitle('Muted Successfully!')
+                    .setDescription(`<@${memberTarget.user.id}> has been muted 🤫`);
+
+
+
+                message.channel.send(muteSuccess);
+
+                const muteSuccessDM = new Discord.MessageEmbed()
+                    .setColor('RANDOM')
+                    .setTitle('Muted!')
+                    .setDescription(`You have been muted forever 🤫`)
+                    .setFooter(`Moderator : @${message.author.tag}`)
+                    .setTimestamp();
+                memberTarget.send(muteSuccessDM);
+                return;
+            }
             
             memberTarget.roles.add(mutedRole.id);
             const muteSuccessTimer = new Discord.MessageEmbed()
