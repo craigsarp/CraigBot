@@ -7,7 +7,7 @@ module.exports = {
         const target = message.mentions.users.first();
 
         if (isNaN(args[1)) || message.mentions.members.first()){
-          if (isNaN(ms(args[1]))) {
+          if (isNaN(ms(args[1])) {
           return message.reply('Please type a valid time.')
         }
         }
